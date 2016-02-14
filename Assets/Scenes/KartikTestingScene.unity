@@ -5939,7 +5939,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
 --- !u!1 &432507840
 GameObject:
   m_ObjectHideFlags: 0
@@ -10201,7 +10201,8 @@ GameObject:
   - 81: {fileID: 1123281893}
   - 114: {fileID: 1123281898}
   - 114: {fileID: 1123281899}
-  - 114: {fileID: 1123281902}
+  - 114: {fileID: 1123281900}
+  - 114: {fileID: 1123281901}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -10286,33 +10287,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1123281892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac4e6cac34dcb4f288ba0c1e9f47fcec, type: 3}
+  m_Script: {fileID: 11500000, guid: c8cbf479ef970476aab3f3103abf6e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
 --- !u!114 &1123281899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1123281892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd6d4281e5d7cd44d8c6e38bc2c1b8d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mode: 0
-  intensity: 0.208
-  chromaticAberration: 0
-  axialAberration: 0.5
-  blur: 0.519
-  blurSpread: 0.219
-  luminanceDependency: 0.25
-  blurDistance: 2.5
-  vignetteShader: {fileID: 4800000, guid: 627943dc7a9a74286b70a4f694a0acd5, type: 3}
-  separableBlurShader: {fileID: 4800000, guid: e97c14fbb5ea04c3a902cc533d7fc5d1, type: 3}
-  chromAberrationShader: {fileID: 4800000, guid: 2b4f29398d9484ccfa9fd220449f5eee,
-    type: 3}
---- !u!114 &1123281902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -10323,7 +10302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9191284b058eef549b7108b5f04e1117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensityMultiplier: 0.7
+  intensityMultiplier: 0.48
   generalIntensity: 0.5
   blackIntensity: 1
   whiteIntensity: 1
@@ -10334,10 +10313,47 @@ MonoBehaviour:
   intensities: {x: 1, y: 1, z: 1}
   tiling: {x: 64, y: 64, z: 64}
   monochromeTiling: 64
-  filterMode: 0
+  filterMode: 1
   noiseTexture: {fileID: 2800000, guid: 7a632f967e8ad42f5bd275898151ab6a, type: 3}
   noiseShader: {fileID: 4800000, guid: b0249d8c935344451aa4de6db76f0688, type: 3}
   dx11NoiseShader: {fileID: 4800000, guid: 8b30686bb4322ab42ad5eb50a0210b58, type: 3}
+--- !u!114 &1123281900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1123281892}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64b4f3a592f28b44bf19223ac8b6cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 0.93
+  softness: 2
+  spread: 1.6
+  blurShader: {fileID: 4800000, guid: e97c14fbb5ea04c3a902cc533d7fc5d1, type: 3}
+  depthFetchShader: {fileID: 4800000, guid: 14768d3865b1342e3a861fbe19ba2db2, type: 3}
+  creaseApplyShader: {fileID: 4800000, guid: b59984d82af624bd3b0c777f038276f2, type: 3}
+--- !u!114 &1123281901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1123281892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0923359e9e352a4b9b11c7b7161ad67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Radius: 0.4
+  m_SampleCount: 1
+  m_OcclusionIntensity: 2.79
+  m_Blur: 2
+  m_Downsampling: 2
+  m_OcclusionAttenuation: 1
+  m_MinZ: 0.01
+  m_SSAOShader: {fileID: 4800000, guid: 43ca18288c424f645aaa1e9e07f04c50, type: 3}
+  m_RandomTexture: {fileID: 2800000, guid: a181ca8e3c62f3e4b8f183f6c586b032, type: 3}
 --- !u!1 &1133675168
 GameObject:
   m_ObjectHideFlags: 0
@@ -11597,11 +11613,6 @@ MonoBehaviour:
   - {fileID: 148824, guid: 01a4cc8acebc9074ca37ca449dc7e031, type: 2}
   - {fileID: 148824, guid: 4079ebb4e81811f40b4b5045291e1d59, type: 2}
   - {fileID: 148824, guid: 620705417fe842d46bb079b8700f00ed, type: 2}
-  - {fileID: 148824, guid: aa1d14df422011e48a74f0928e1f02a1, type: 2}
-  - {fileID: 148824, guid: 6d94054004ac25645b13106d5cf3e8bc, type: 2}
-  - {fileID: 148824, guid: 82dde47ed9d2c6949b31a1246fb923b7, type: 2}
-  - {fileID: 148824, guid: a63b5f9532971e44d921807aeb107750, type: 2}
-  - {fileID: 148824, guid: 3e1a53a21f096cf47ba1844fb8ff6f63, type: 2}
   playerPrefab: {fileID: 0}
 --- !u!4 &1356824451
 Transform:
@@ -12816,9 +12827,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a33546fbc264b0094a495359f6a1f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashMin: 0.1
-  flashMax: 1
-  numFlash: 5
+  flashMin: 0
+  flashMax: 0
+  numFlash: 0
 --- !u!1 &1557870116
 GameObject:
   m_ObjectHideFlags: 0
@@ -13331,14 +13342,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1634757968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc6bde01469c7b4badee5362f191d96, type: 3}
+  m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  downsample: 1
-  blurSize: 1.46
+  threshold: 0.25
+  intensity: 0.75
+  blurSize: 1
   blurIterations: 1
   blurType: 0
-  blurShader: {fileID: 4800000, guid: f9d5fa183cd6b45eeb1491f74863cd91, type: 3}
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!114 &1634757971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13347,39 +13359,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1634757968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02536f33053638549ab5c50ff3ecc0de, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fc6bde01469c7b4badee5362f191d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweakMode: 0
-  screenBlendMode: 1
-  hdr: 0
-  sepBlurSpread: 1.5
-  useSrcAlphaAsMask: 0
-  bloomIntensity: 2
-  bloomThreshold: 0.5
-  bloomBlurIterations: 2
-  lensflares: 0
-  hollywoodFlareBlurIterations: 2
-  lensflareMode: 1
-  hollyStretchWidth: 3.5
-  lensflareIntensity: 1
-  lensflareThreshold: 0.3
-  flareColorA: {r: 0.4, g: 0.4, b: 0.8, a: 0.75}
-  flareColorB: {r: 0.4, g: 0.8, b: 0.8, a: 0.75}
-  flareColorC: {r: 0.8, g: 0.4, b: 0.8, a: 0.75}
-  flareColorD: {r: 0.8, g: 0.4, b: 0, a: 0.75}
-  lensFlareVignetteMask: {fileID: 2800000, guid: 95ef4804fe0be4c999ddaa383536cde8,
-    type: 3}
-  lensFlareShader: {fileID: 4800000, guid: 459fe69d2f6d74ddb92f04dbf45a866b, type: 3}
-  vignetteShader: {fileID: 4800000, guid: 627943dc7a9a74286b70a4f694a0acd5, type: 3}
-  separableBlurShader: {fileID: 4800000, guid: a9df009a214e24a5ebbf271595f8d5b6, type: 3}
-  addBrightStuffOneOneShader: {fileID: 4800000, guid: f7898d203e9b94c0dbe2bf9dd5cb32c0,
-    type: 3}
-  screenBlendShader: {fileID: 4800000, guid: 53b3960ee3d3d4a5caa8d5473d120187, type: 3}
-  hollywoodFlaresShader: {fileID: 4800000, guid: e2baf3cae8edc4daf94c9adc2154be00,
-    type: 3}
-  brightPassFilterShader: {fileID: 4800000, guid: 186c4c0d31e314f049595dcbaf4ca129,
-    type: 3}
+  downsample: 1
+  blurSize: 0.16
+  blurIterations: 2
+  blurType: 0
+  blurShader: {fileID: 4800000, guid: f9d5fa183cd6b45eeb1491f74863cd91, type: 3}
 --- !u!124 &1634757974
 Behaviour:
   m_ObjectHideFlags: 0

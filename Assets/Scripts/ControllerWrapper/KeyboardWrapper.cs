@@ -4,6 +4,14 @@ using System;
 
 public class KeyboardWrapper : ControllerInputWrapper {
 
+	public enum MouseControlMode {None, Drag, Offset};
+
+	public static MouseControlMode mouseControlMode = MouseControlMode.Drag;
+
+	private bool dragStarted;
+	private Vector3 prevMousePos = Vector3.zero;
+	private Vector2 dragDifference = Vector2.zero;
+
 	public KeyboardWrapper(int joyNum) : base(joyNum)
     {
 		
@@ -24,12 +32,10 @@ public class KeyboardWrapper : ControllerInputWrapper {
                 break;
             case Axis.RightStickX:
                 vec = retrieveMouseOffset();
-                vec -= Vector3.up * vec.y;
                 return vec.normalized.x;
             case Axis.RightStickY:
                 vec = retrieveMouseOffset();
-                vec -= Vector3.up * vec.y;
-                return vec.normalized.z;
+				return vec.normalized.y;
 			case Axis.DPadX:
 				axisName = getAxisName("DPadX", "DPadX", "DPadX");
 				scale = 0.09f;
@@ -44,21 +50,27 @@ public class KeyboardWrapper : ControllerInputWrapper {
 
     Vector3 retrieveMouseOffset()
     {
-//        if (currentPlayer == null || mainCamera == null)
-//        {
-//            return Vector3.zero;
-//        }
-//        Ray checkRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-//        RaycastHit hit;
-//        if (Physics.Raycast(checkRay, out hit, 100))
-//        {
-//            //Debug.Log(hit.collider.name);
-//            return hit.point - currentPlayer.position;
-//        }
-//
-//        //Debug.DrawLine(checkRay.origin, checkRay.origin + checkRay.direction * 100);
-//        
-//        return (checkRay.origin + checkRay.direction * 100) - currentPlayer.position;
+		switch (mouseControlMode) {
+			case MouseControlMode.None:
+				return Vector3.zero;
+			case MouseControlMode.Drag:
+				if(Input.GetMouseButtonDown(0)) {
+					prevMousePos = Input.mousePosition;
+					dragStarted = true;
+				} else if(!Input.GetMouseButton(0)) {
+					dragStarted = false;
+				}
+				if(dragStarted) {
+					dragDifference = new Vector2(Input.mousePosition.x - prevMousePos.x, Input.mousePosition.y - prevMousePos.y);
+				} else {
+					dragDifference = Vector2.zero;
+				}
+				return dragDifference;
+			case MouseControlMode.Offset:
+				dragDifference += new Vector2(Input.mousePosition.x - prevMousePos.x, Input.mousePosition.y - prevMousePos.y);
+				prevMousePos = Input.mousePosition;
+				return dragDifference;
+		}
 		return Vector3.zero;
     }
 
