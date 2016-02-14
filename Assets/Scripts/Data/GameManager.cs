@@ -212,6 +212,11 @@ namespace Assets.Scripts.Data
             controllers.Remove(removePlayer);
         }
 
+		public Controller GetPlayer(PlayerID id) {
+			Controller p = controllers.Find(x => x.ID.Equals(id));
+			return p;
+		}
+
         #region C# Properties
         /// <summary>
         /// List of all the tokens prefabs

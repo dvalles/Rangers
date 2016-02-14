@@ -60,29 +60,49 @@ namespace Assets.Scripts.Player
 
 		void Update() {
 			jumpingTimeOffset -= Time.deltaTime;
-			if((facingRight && !Physics.Raycast(new Ray(transform.position, transform.forward),0.5f,~(1<<9)))
-				|| (!facingRight && !Physics.Raycast(new Ray(transform.position, -transform.forward),0.5f,~(1<<9)))) {
+//			if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Slide")) {
+////				transform.Translate(Vector3.right*lastMotion*Time.deltaTime*16f, Space.World);
+//				sliding = true;
+////				if(GetComponent<Animator>().IsInTransition(0)) {
+////					lastMotion -= Time.deltaTime;
+////				}
+//			} else if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SlideLeft")) {
+////				transform.Translate(-Vector3.left*lastMotion*Time.deltaTime*16f, Space.World);
+//				sliding = true;
+////				if(GetComponent<Animator>().IsInTransition(0)) {
+////					lastMotion += Time.deltaTime;
+////				}
+//			} else {
+//				sliding = false;
+//			}
+//			if((facingRight && !Physics.Raycast(new Ray(transform.position, transform.forward),0.5f,~(1<<9)))
+//				|| (!facingRight && !Physics.Raycast(new Ray(transform.position, -transform.forward),0.5f,~(1<<9)))) {
+//
+//				if((GetComponent<Animator>().GetAnimatorTransitionInfo(0).IsName("WalkRunRight -> Slide")
+//					|| GetComponent<Animator>().GetAnimatorTransitionInfo(0).IsName("WalkRunLeft -> SlideLeft"))
+//					&& !GetComponent<Animator>().IsInTransition(0)) {
+//					sliding = true;
+//					transform.Translate(Vector3.forward*lastMotion*Time.deltaTime*8f);
+//				} else if(GetComponent<Animator>().GetAnimatorTransitionInfo(0).IsName("Slide -> WalkRunRight")) {
+//					sliding = false;
+//					transform.Translate(Vector3.forward*Time.deltaTime*8);
+//				} else if(GetComponent<Animator>().GetAnimatorTransitionInfo(0).IsName("SlideLeft -> WalkRunLeft")) {
+//					sliding = false;
+//					transform.Translate(-Vector3.forward*Time.deltaTime*8);
+//				} else if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Slide") || GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SlideLeft")) {
+//					if(!GetComponent<Animator>().IsInTransition(0)) {
+//						transform.Translate(Vector3.forward*lastMotion*Time.deltaTime*10);
+//						GetComponent<Rigidbody>().AddForce(Vector3.down*10f, ForceMode.Acceleration);
+//					}
+//				}
+//
+//			}
 
-				if(GetComponent<Animator>().GetAnimatorTransitionInfo(0).IsName("WalkRunRight -> Slide")
-					|| GetComponent<Animator>().GetAnimatorTransitionInfo(0).IsName("WalkRunLeft -> SlideLeft")) {
-					sliding = true;
-					transform.Translate(Vector3.forward*lastMotion*Time.deltaTime*8f);
-					GetComponent<Rigidbody>().AddForce(Vector3.down*15f, ForceMode.Acceleration);
-				} else if(GetComponent<Animator>().GetAnimatorTransitionInfo(0).IsName("Slide -> WalkRunRight")) {
-					sliding = false;
-					transform.Translate(Vector3.forward*Time.deltaTime*8);
-				} else if(GetComponent<Animator>().GetAnimatorTransitionInfo(0).IsName("SlideLeft -> WalkRunLeft")) {
-					sliding = false;
-					transform.Translate(-Vector3.forward*Time.deltaTime*8);
-				} else if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Slide") || GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SlideLeft")) {
-					if(!GetComponent<Animator>().IsInTransition(0)) {
-						transform.Translate(Vector3.forward*lastMotion*Time.deltaTime*10);
-						GetComponent<Rigidbody>().AddForce(Vector3.down*10f, ForceMode.Acceleration);
-					}
-				}
 
-			}
+		}
 
+		public void SlideVelocity() {
+			GetComponent<Rigidbody>().velocity = Vector3.right*lastMotion*10f;
 		}
 
 		public void SlideOn() {
